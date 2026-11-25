@@ -366,7 +366,11 @@ pub struct BundlePatchPack {
     pub crc: i64,
     pub is_prologue: bool,
     pub is_split_download: bool,
-    pub bundle_files: Vec<BundleFile>
+    pub bundle_files: Vec<BundleFile>,
+    /// Added in the Blue Archive 1.75.0 (Unity 6.3) patch catalog.
+    pub entry_offsets: Vec<i64>,
+    /// Added in the Blue Archive 1.75.0 (Unity 6.3) patch catalog.
+    pub entry_compressed_sizes: Vec<i64>
 }
 
 #[derive(MemoryPackable, Serialize, Deserialize, Debug, Clone, Default)]
@@ -377,6 +381,9 @@ pub struct BundleFile {
     pub is_prologue: bool,
     pub crc: i64,
     pub is_split_download: bool,
+    /// Added in the Blue Archive 1.75.0 (Unity 6.3) patch catalog. Previously
+    /// only the derived `FileHash`/`Signature` values were exposed.
+    pub hash: String,
     pub file_hash: u64,
     pub signature: String
 }
